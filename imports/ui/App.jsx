@@ -3,7 +3,7 @@ import React, { useState, Fragment } from "react";
 import { useTracker } from "meteor/react-meteor-data";
 import { LoginForm } from "./LoginForm";
 import { FilesCollection } from "/imports/db/FilesCollection";
-import { FileElement } from "./FileElement";
+import { FilesList } from "./FilesList";
 import { FileUploadForm } from "./FileUploadForm";
 
 const deleteFile = ({ _id }) => Meteor.call("files.remove", _id);
@@ -63,21 +63,8 @@ export const App = () => {
               <FileUploadForm />
             </div>
 
-            {isLoadingFiles && <div className="loading">loading...</div>}
+            <FilesList isLoadingFiles={isLoadingFiles} files={files} functions={{deleteFile}}/>
 
-            <ul className="files">
-              {files.map((file) => (
-                <FileElement
-                  key={file._id}
-                  file={file}
-                  onDeleteClick={deleteFile}
-                />
-              ))}
-            </ul>
-
-            {files.length == 0 && (
-              <div className="center-aligned large-height">No File Here</div>
-            )}
           </Fragment>
         ) : (
           <LoginForm />
