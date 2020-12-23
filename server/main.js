@@ -1,18 +1,9 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-import { TasksCollection } from "/imports/db/TasksCollection";
 import { FilesCollection } from "/imports/db/FilesCollection";
-import "/imports/api/tasksMethods";
-import "/imports/api/tasksPublications";
+import "/imports/api/authMethods";
 import "/imports/api/filesMethods";
 import "/imports/api/filesPublications";
-
-const insertTask = (taskText, user) =>
-  TasksCollection.insert({
-    text: taskText,
-    userId: user._id,
-    createdAt: new Date(),
-  });
 
 const insertFile = (file, user) =>
   FilesCollection.insert({
@@ -36,23 +27,11 @@ Meteor.startup(() => {
 
   const user = Accounts.findUserByUsername(SEED_USERNAME);
 
-  if (TasksCollection.find().count() === 0) {
-    [
-      "First Task",
-      "Second Task",
-      "Third Task",
-      "Fourth Task",
-      "Fifth Task",
-      "Sixth Task",
-      "Seventh Task",
-    ].forEach((taskText) => insertTask(taskText, user));
-  }
-
-  if (FilesCollection.find().count() === 0) {
-    [
-      { name: "Google", url: "https://www.google.com", isDirectory: true },
-      { name: "Yahoo", url: "https://www.yahoo.com", isDirectory: true },
-      { name: "Gmail", url: "https://www.gmail.com", isDirectory: true },
-    ].forEach((file) => insertFile(file, user));
-  }
+  // if (FilesCollection.find().count() === 0) {
+  //   [
+  //     { name: "Google", url: "https://www.google.com", isDirectory: true },
+  //     { name: "Yahoo", url: "https://www.yahoo.com", isDirectory: true },
+  //     { name: "Gmail", url: "https://www.gmail.com", isDirectory: true },
+  //   ].forEach((file) => insertFile(file, user));
+  // }
 });

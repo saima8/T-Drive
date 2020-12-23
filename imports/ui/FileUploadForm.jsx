@@ -24,14 +24,19 @@ export const FileUploadForm = () => {
   return (
     <div className="file-upload-div">
       {showOverlay && (
-        <PickerInline
+        <PickerOverlay
           apikey="AxupnRiI4RUegnGZhVEAwz"
           onSuccess={fileUploadSuccess}
         />
       )}
 
-      <button onClick={() => setShowOverlay(!showOverlay)}>
-        {showOverlay ? "Close Upload Form" : "Upload File"}
+      <button
+        onClick={() => {
+          setShowOverlay(false);
+          setTimeout(() => setShowOverlay(true), 100);
+        }}
+      >
+        Upload File
       </button>
     </div>
   );

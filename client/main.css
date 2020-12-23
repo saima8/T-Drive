@@ -103,6 +103,12 @@ header {
   background-color: #315481;
 }
 
+.file-upload-div > button {
+  min-width: 100px;
+  height: 95%;
+  background-color: #315481;
+}
+
 .tasks {
   list-style-type: none;
   padding-inline-start: 0;
@@ -154,6 +160,17 @@ header {
 .filter {
   display: flex;
   justify-content: center;
+}
+
+.large-height {
+  min-height: 70vh;
+}
+
+.center-aligned {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 .filter > button {
