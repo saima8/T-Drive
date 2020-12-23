@@ -1,7 +1,7 @@
 body {
   font-family: sans-serif;
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  /* background-color: #315481; */
+  /* background-image: linear-gradient(to bottom, #315481, #918e82 100%); */
   background-attachment: fixed;
 
   position: absolute;
@@ -20,7 +20,7 @@ button {
   font-weight: bold;
   font-size: 1em;
   border: none;
-  color: white;
+  /* color: white; */
   box-shadow: 0 3px 3px rgba(34, 25, 25, 0.4);
   padding: 5px;
   cursor: pointer;
@@ -58,11 +58,11 @@ button:focus {
 }
 
 header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
+  /* background: #d2edf4; */
+  /* background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%); */
+  padding: 10px 15px 5px 15px;
   position: relative;
-  box-shadow: 0 3px 3px rgba(34, 25, 25, 0.4);
+  box-shadow: 0 3px 3px rgba(88, 49, 49, 0.178);
 }
 
 .app-bar {
@@ -107,6 +107,7 @@ header {
   min-width: 100px;
   height: 95%;
   background-color: #315481;
+  color: white;
 }
 
 .tasks {
@@ -154,7 +155,7 @@ header {
 
 .files > li > button {
   justify-self: flex-end;
-  background-color: #ff3046;
+  /* background-color: #ff3046; */
 }
 
 .filter {
@@ -215,11 +216,10 @@ header {
 }
 
 .user {
-  display: flex;
+  display: inline-flex;
 
   align-self: flex-end;
 
-  margin: 8px 16px 0;
   font-weight: bold;
 }
 
@@ -236,4 +236,5 @@ header {
 
 .user-logout {
   background-color: #ff3046;
+  color: white;
 }

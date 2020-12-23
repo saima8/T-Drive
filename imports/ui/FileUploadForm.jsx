@@ -31,12 +31,14 @@ export const FileUploadForm = () => {
       )}
 
       <button
+        className="btn"
         onClick={() => {
           setShowOverlay(false);
           setTimeout(() => setShowOverlay(true), 100);
         }}
       >
-        Upload File
+        <i className="fas fa-upload"></i>
+        <span className="ml-3">Upload File</span>
       </button>
     </div>
   );
