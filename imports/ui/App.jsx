@@ -5,6 +5,11 @@ import { TasksCollection } from "/imports/db/TasksCollection";
 import { Task } from "./Task";
 import { TaskForm } from "./TaskForm";
 import { LoginForm } from "./LoginForm";
+import { FilesCollection } from "/imports/db/FilesCollection";
+import { FileElement } from "./FileElement";
+import { FileUploadForm } from "./FileUploadForm";
+
+const deleteFile = ({ _id }) => Meteor.call("files.remove", _id);
 
 const toggleChecked = ({ _id, isChecked }) =>
   Meteor.call("tasks.setIsChecked", _id, !isChecked);
@@ -13,6 +18,28 @@ const deleteTask = ({ _id }) => Meteor.call("tasks.remove", _id);
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
+
+  const ownerFilter = user ? { ownerId: user._id } : {};
+
+  const { files, isLoadingFiles } = useTracker(() => {
+    const noDataAvailable = { files: [] };
+
+    if (!Meteor.user()) {
+      return noDataAvailable;
+    }
+
+    const handler = Meteor.subscribe("files");
+
+    if (!handler.ready()) {
+      return { ...noDataAvailable, isLoadingFiles: true };
+    }
+
+    const files = FilesCollection.find(ownerFilter, {
+      sort: { createdAt: -1 },
+    }).fetch();
+
+    return { files };
+  });
 
   const [hideCompleted, setHideCompleted] = useState(false);
 
@@ -55,10 +82,7 @@ export const App = () => {
       <header>
         <div className="app-bar">
           <div className="app-header">
-            <h1>
-              📝️ T Drive
-              {pendingTasksTitle}
-            </h1>
+            <h1>📝️ T Drive</h1>
           </div>
         </div>
       </header>
@@ -68,7 +92,9 @@ export const App = () => {
           <Fragment>
             <div className="user">
               <h3>{user.username} </h3> &nbsp; &nbsp; &nbsp;
-              <button className="user-logout" onClick={logout}>logout</button>
+              <button className="user-logout" onClick={logout}>
+                logout
+              </button>
             </div>
 
             <TaskForm />
@@ -79,7 +105,7 @@ export const App = () => {
               </button>
             </div>
 
-            {isLoading && <div className="loading">loading...</div>}
+            {isLoadingFiles && <div className="loading">loading...</div>}
 
             <ul className="tasks">
               {tasks.map((task) => (
@@ -88,6 +114,18 @@ export const App = () => {
                   task={task}
                   onCheckboxClick={toggleChecked}
                   onDeleteClick={deleteTask}
+                />
+              ))}
+            </ul>
+
+            <FileUploadForm />
+
+            <ul className="files">
+              {files.map((file) => (
+                <FileElement
+                  key={file._id}
+                  file={file}
+                  onDeleteClick={deleteFile}
                 />
               ))}
             </ul>

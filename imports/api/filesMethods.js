@@ -1,31 +1,31 @@
-import { check } from 'meteor/check';
-import { FilesCollection } from '/imports/db/FilesCollection';
+import { check } from "meteor/check";
+import { FilesCollection } from "/imports/db/FilesCollection";
 
 Meteor.methods({
-  'files.insert'(file) {
+  "files.insert"(file) {
     check(file.name, String);
     check(file.url, String);
     check(file.isDirectory, Boolean);
 
     if (!this.userId) {
-      throw new Meteor.Error('Not authorized.');
+      throw new Meteor.Error("Not authorized.");
     }
 
     FilesCollection.insert({
       ...file,
       createdAt: new Date(),
-      userId: this.userId,
+      ownerId: this.userId,
     });
   },
 
-  'files.remove'(fileId) {
+  "files.remove"(fileId) {
     check(fileId, String);
 
     if (!this.userId) {
-      throw new Meteor.Error('Not authorized.');
+      throw new Meteor.Error("Not authorized.");
     }
 
-    const file = FilesCollection.findOne({ _id: fileId, userId: this.userId });
+    const file = FilesCollection.findOne({ _id: fileId, ownerId: this.userId });
 
     if (!file) {
       throw new Meteor.Error("Access denied or File Doesn't Exist.");
