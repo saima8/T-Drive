@@ -4,6 +4,8 @@ import { TasksCollection } from "/imports/db/TasksCollection";
 import { FilesCollection } from "/imports/db/FilesCollection";
 import "/imports/api/tasksMethods";
 import "/imports/api/tasksPublications";
+import "/imports/api/filesMethods";
+import "/imports/api/filesPublications";
 
 const insertTask = (taskText, user) =>
   TasksCollection.insert({
