@@ -1,3 +1,4 @@
+import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
 import { FileShareSection } from "./FileShareSection";
 
@@ -8,6 +9,22 @@ export const FileElement = ({
   currentPage,
 }) => {
   const [showShareSection, setshowShareSection] = useState(false);
+
+  const [username, setUsername] = useState("");
+
+  const ownerId = file.ownerId;
+
+  Meteor.call("findUsernameFromId", ownerId, function (err, user) {
+    if (err) {
+      console.log(err);
+    }
+
+    if (user) {
+      if (!username) {
+        setUsername(user.username);
+      }
+    }
+  });
 
   return (
     <>
@@ -39,6 +56,10 @@ export const FileElement = ({
 
           {currentPage == "sharedWithMe" && (
             <div className="btn-group">
+              {username && (
+                <div className="btn btn-muted">Shared by {username}</div>
+              )}
+
               <button
                 className="btn btn-light"
                 onClick={() => stopSharingWithMe(file._id)}

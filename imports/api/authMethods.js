@@ -11,4 +11,8 @@ Meteor.methods({
       });
     }
   },
+
+  "findUsernameFromId"(id) {
+    return Meteor.users.find({_id: id}).fetch()[0];
+  },
 });
