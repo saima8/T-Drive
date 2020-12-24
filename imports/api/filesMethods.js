@@ -65,7 +65,6 @@ Meteor.methods({
 
     const file = FilesCollection.findOne({
       _id: fileId,
-      // $or: [{ ownerId: this.userId }, { ["sharedWith#" + this.userId]: true }],
     });
 
     if (!file) {
@@ -79,24 +78,4 @@ Meteor.methods({
     });
   },
 
-  // 'files.setIsChecked'(fileId, isChecked) {
-  //   check(fileId, String);
-  //   check(isChecked, Boolean);
-
-  //   if (!this.userId) {
-  //     throw new Meteor.Error('Not authorized.');
-  //   }
-
-  //   const file = FilesCollection.findOne({ _id: fileId, userId: this.userId });
-
-  //   if (!file) {
-  //     throw new Meteor.Error('Access denied.');
-  //   }
-
-  //   FilesCollection.update(fileId, {
-  //     $set: {
-  //       isChecked,
-  //     },
-  //   });
-  // },
 });

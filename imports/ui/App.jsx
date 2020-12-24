@@ -69,9 +69,7 @@ export const App = () => {
         {user ? (
           <Fragment>
             <div className="filter">
-              {/* <button onClick={() => setHideCompleted(!hideCompleted)}>
-                {hideCompleted ? "Show All" : "Hide Completed"}
-              </button> */}
+              
 
               <div
                 className="btn-toolbar mb-3"
