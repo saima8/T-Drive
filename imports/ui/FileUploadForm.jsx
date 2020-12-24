@@ -25,7 +25,7 @@ export const FileUploadForm = () => {
     <div className="file-upload-div">
       {showOverlay && (
         <PickerOverlay
-          apikey="AxupnRiI4RUegnGZhVEAwz"
+          apikey="AFbl1oNHIRSyM9f5SOswBz"
           onSuccess={fileUploadSuccess}
         />
       )}
