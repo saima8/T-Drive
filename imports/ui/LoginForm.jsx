@@ -62,7 +62,7 @@ export const LoginForm = () => {
       </div>
 
       <div>
-        Don't have and account?{" "}
+        Don't have any account?{" "}
         <a href="#" onClick={() => setShowLoginForm(false)}>
           Register Here
         </a>
